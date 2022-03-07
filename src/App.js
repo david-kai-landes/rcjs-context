@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import AddUser from "./Components/AddUser";
+import User from "./Components/User";
+import UserList from "./Components/UserList";
+import { AppContext } from "./Components/context";
+
+const userList = [
+  {
+    id: 1,
+    name: "David",
+    age: 29,
+    bio: "Full time software enginner at Banyan Air",
+  },
+];
 
 function App() {
+  const [users, setUsers] = useState(userList);
+
+  const dispatchUserEvent = (actionType, payload) => {
+    
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <AppContext.Provide value={{ users }}>
+        <AddUser />
+        <UserList />
+        <User />
+      </AppContext.Provide>
     </div>
   );
 }
