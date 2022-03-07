@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AppContext } from "./context";
+import User from "../Components/User";
 
 const UserList = () => {
-  return <div>User Lis Components</div>;
+  const { users } = useContext(AppContext);
+
+  return (
+    <div>
+      <h3>Available User</h3>
+      {users.map((user) => (
+        <User key={user.id} user={user} />
+      ))}
+    </div>
+  );
 };
 
 export default UserList;

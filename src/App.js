@@ -18,16 +18,24 @@ function App() {
   const [users, setUsers] = useState(userList);
 
   const dispatchUserEvent = (actionType, payload) => {
-    
-  }
+    switch (actionType) {
+      case "ADD_USER":
+        setUsers([...users, payload.newUser]);
+        return;
+      case "REMOVE_USER":
+        setUsers(users.filter((user) => user.id !== payload.userId));
+        return;
+      default:
+        return;
+    }
+  };
 
   return (
     <div className="App">
-      <AppContext.Provide value={{ users }}>
+      <AppContext.Provider value={{ users, dispatchUserEvent }}>
         <AddUser />
         <UserList />
-        <User />
-      </AppContext.Provide>
+      </AppContext.Provider>
     </div>
   );
 }
